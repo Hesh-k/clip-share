@@ -1,0 +1,13 @@
+{
+  "name": "r2-clip-test",
+  "private": true,
+  "workspaces": [
+    "cli",
+    "worker"
+  ],
+  "scripts": {
+    "cli": "npm --workspace @r2-clip-test/cli run cli --",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  }
+}

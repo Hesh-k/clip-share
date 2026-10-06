@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "r2-clip-test",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-30",
+  "workers_dev": true,
+  "r2_buckets": [
+    {
+      "binding": "CLIPS",
+      "bucket_name": "replace-with-your-private-r2-bucket"
+    }
+  ]
+}
