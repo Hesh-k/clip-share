@@ -13,7 +13,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { Upload } from "@aws-sdk/lib-storage";
 import type { AppConfig } from "./config.js";
-import { contentTypeFor, generateId, isValidId, sanitizeOriginalName } from "./helpers.js";
+import { contentTypeFor, generateId, isValidId, renderQrCode, sanitizeOriginalName } from "./helpers.js";
 import { explainR2Error } from "./client.js";
 import { readManifest, writeManifest } from "./manifest.js";
 
@@ -244,6 +244,10 @@ export async function uploadFolder(
   if (results.some((result) => result.status === "uploaded")) await writeManifest(manifest);
   if (results.length > 0) {
     printTable(results.map(({ filename, size, link, status }) => ({ File: filename, Size: size, Link: link, Status: status })));
+    console.log("\nScan a QR code to open a clip:");
+    for (const { filename, link } of results) {
+      console.log(`\n${filename}\n${link}\n${renderQrCode(link)}`);
+    }
   } else if (failures.length > 0) {
     console.log("No clips were uploaded successfully.");
   }

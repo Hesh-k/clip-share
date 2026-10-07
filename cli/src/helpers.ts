@@ -1,5 +1,8 @@
 import { randomBytes } from "node:crypto";
+import { createRequire } from "node:module";
 import path from "node:path";
+
+const qrcodeTerminal = createRequire(import.meta.url)("qrcode-terminal") as typeof import("qrcode-terminal");
 
 const BASE62 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 const CONTENT_TYPES: Record<string, string> = {
@@ -38,4 +41,13 @@ export function sanitizeOriginalName(filename: string): string {
     .trim()
     .slice(0, 255);
   return safe || "video";
+}
+
+export function renderQrCode(value: string): string {
+  let output = "";
+  qrcodeTerminal.generate(value, { small: true }, (qrCode) => {
+    output = qrCode;
+  });
+  if (!output) throw new Error("Failed to generate QR code.");
+  return output;
 }

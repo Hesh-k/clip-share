@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { contentTypeFor, generateId, isValidId, sanitizeOriginalName } from "../src/helpers.js";
+import { contentTypeFor, generateId, isValidId, renderQrCode, sanitizeOriginalName } from "../src/helpers.js";
 
 describe("CLI helpers", () => {
   it("generates valid 10-character base62 IDs", () => {
@@ -23,5 +23,11 @@ describe("CLI helpers", () => {
   it("sanitizes original names", () => {
     expect(sanitizeOriginalName("../a\\b\u0000.mp4")).toBe("b.mp4");
     expect(sanitizeOriginalName("   ")).toBe("video");
+  });
+
+  it("renders a link as a terminal QR code", () => {
+    const qrCode = renderQrCode("https://clips.example.com/c/abC1234567");
+    expect(qrCode).toContain("\u2588");
+    expect(qrCode.split("\n").length).toBeGreaterThan(10);
   });
 });

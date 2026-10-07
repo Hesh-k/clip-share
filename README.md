@@ -59,6 +59,7 @@ npm run cli -- delete abc1234567 --yes
 ```
 
 The CLI supports `.mp4`, `.webm`, `.mov`, `.m4v`, and `.mkv`. It streams files, checks uploaded object sizes, and records SHA-256-to-ID mappings in the ignored local `.r2-manifest.json` file.
+After an upload, the CLI prints a terminal QR code for each successful clip link so it can be scanned from the terminal.
 
 ## End-to-end walkthrough
 
