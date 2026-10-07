@@ -1,6 +1,6 @@
 # r2-clip-share
 
-![sample img](./sample.png)
+![sample img](./img.png)
 
 A small TypeScript proof of concept for uploading video clips to a **private** Cloudflare R2 bucket and sharing them through a Cloudflare Worker. The bucket is never exposed publicly; the Worker is the only viewing and download endpoint.
 
